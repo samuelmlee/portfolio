@@ -29,6 +29,7 @@ this.interval = setInterval(() => {
 }, 5000);
   }
 
+  
   ngOnDestroy(): void {
 clearInterval(this.interval) ;
   }
