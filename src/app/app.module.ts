@@ -11,6 +11,9 @@ import { StocksComponent } from './stocks/stocks.component';
 import { AlertComponent } from './alert/alert.component';
 
 import { LocalStorageService } from './services/local-storage.service';
+import {AccountService} from './services/account.service';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import {StocksInterceptor} from './services/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -24,10 +27,17 @@ import { LocalStorageService } from './services/local-storage.service';
         BrowserModule,
         BrowserAnimationsModule,
         ClarityModule,
+        HttpClientModule
   ],
   providers: [
         LocalStorageService,
-        CurrencyPipe
+        CurrencyPipe,
+    AccountService,
+    {
+      provide: HTTP_INTERCEPTORS,
+useClass: StocksInterceptor,
+      multi: true
+    }
        ],
   bootstrap: [AppComponent]
 })
